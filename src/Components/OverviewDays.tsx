@@ -2,8 +2,8 @@ import {Link} from "react-router-dom";
 import { RiMoreFill } from "react-icons/ri";
 
 type OverviewDaysProps = {
-    date: any;
-    AvgTemp: any;
+    date: string;
+    AvgTemp: number;
     page:any;
 }
 

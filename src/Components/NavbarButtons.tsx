@@ -1,5 +1,5 @@
 
-const NavbarButtons = ({onClick}:any,id:any) => {
+const NavbarButtons = ({onClick}:any) => {
   return <div className='NavbarButtons' data-aos="fade-down" data-aos-easing="linear" data-aos-duration="800">
     <p>Check City:</p>
       <button value='Cebu' onClick={onClick}>Cebu</button>
