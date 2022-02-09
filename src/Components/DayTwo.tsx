@@ -13,6 +13,7 @@ type DayTwoProps = {
 
 const months = ['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nove','Dec']
 
+
 function monthConvert (num:any) {
   return num.charAt(0) ? num.slice(1,2) : num
 }

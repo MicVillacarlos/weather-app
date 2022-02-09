@@ -1,5 +1,5 @@
 import { useEffect, useState,useReducer } from 'react';
-import { BrowserRouter as Router,Route,Routes,Link} from "react-router-dom";
+import { BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import Headline from './Components/Headline';
 import NavbarButtons from './Components/NavbarButtons';
 import OverviewDays from './Components/OverviewDays'
@@ -11,7 +11,15 @@ import DayFour from './Components/DayFour';
 import DayFive from './Components/DayFive';
 import CityName from './Components/CityName';
 
-const reducer =(state:any,action:any)=>{
+type state = {
+  key: string
+  city:string
+}
+type action = {
+  type: string;
+}
+
+const reducer =(state:state,action:action)=>{
   switch (action.type){
     case 'Manila':
       return {key:'264885',city:'Manila, Philippines 1000'}
@@ -41,10 +49,17 @@ const pickCity =(e:string)=>{
     dispatch({type:'Tokyo'})
 }
 
+type df = {
+  Date:string;
+  Temperature: any;
+  Day: any;
+  Night: any;
+}
+
 useEffect (()=> {
     fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${state.key}?apikey=IsBJKbwVFGZGohB2NooCZTABsJgivF4t`)
     .then(res => res.json())
-    .then(res => setWeatherData(res.DailyForecasts.map((df:any) => {
+    .then(res => setWeatherData(res.DailyForecasts.map((df:df) => {
       return{
         date: df.Date.substring(5,10),
         tempHigh: df.Temperature.Maximum.Value,
@@ -58,11 +73,11 @@ useEffect (()=> {
         })
       ))
     },[state]);
-
+console.log(weatherData)
   return (
     <Router>
         <Headline/>
-        <NavbarButtons onClick={(e:any)=>pickCity(e.target.value)}/>
+        <NavbarButtons onClick={(e:MouseEvent|string|any)=>pickCity(e.target.value)}/>
         <CityName city={state.city}/>
       <Routes>
         <Route path='/' element=
