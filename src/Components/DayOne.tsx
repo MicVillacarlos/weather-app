@@ -21,28 +21,27 @@ const DayOne = (props:DayOneProps) => {
   return (
   <div className='perDayParent'>
     <div className='perDay'>
-    <Link to='/'><button><AiFillHome/></button></Link> 
-    <h2>
-        {months[monthConvert(props.date.substring(0,2))]}{' '}
-        {props.date.substring(3,5)}
-    </h2>
-    <div className="dayAndNight">
-        <div>
-            <img src={`https://developer.accuweather.com/sites/default/files/${props.imgKeyDay}-s.png`} alt="weather-icon" />
-            <h5>Day Time</h5>
-            <h6>{props.typeDay}</h6>
+        <Link to='/'><button><AiFillHome/></button></Link> 
+        <h2>
+            {months[monthConvert(props.date.substring(0,2))]}{' '}
+            {props.date.substring(3,5)}
+        </h2>
+        <div className="dayAndNight">
+            <div>
+              <img src={`https://developer.accuweather.com/sites/default/files/${props.imgKeyDay}-s.png`} alt="weather-icon" />
+              <h5>Day Time</h5>
+              <h6>{props.typeDay}</h6>
+            </div>
+            <div>
+              <img src={`https://developer.accuweather.com/sites/default/files/${props.imgKeyNight}-s.png`} alt="weather-icon" />
+              <h5>Night Time</h5>
+              <h6>{props.typeNight}</h6>
+            </div>
         </div>
-        <div>
-            <img src={`https://developer.accuweather.com/sites/default/files/${props.imgKeyNight}-s.png`} alt="weather-icon" />
-            <h5>Night Time</h5>
-            <h6>{props.typeNight}</h6>
-        </div>
+        <div>Temp highest at {props.tempHigh}°F</div>
+        <div>Temp lowest at {props.tempLow}°F</div>
     </div>
-    <div>Temp highest at {props.tempHigh}°F</div>
-    <div>Temp lowest at {props.tempLow}°F</div>
-    </div>
-</div>
+  </div>
 )
   };
-
 export default DayOne;
