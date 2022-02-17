@@ -13,8 +13,9 @@ type DayFourProps = {
 
 const months = ['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nove','Dec']
 
-function monthConvert (num:any) {
-  return num.charAt(0) ? num.slice(1,2) : num
+const monthConvert = (num: string):number => {
+  const monthIndex = num.charAt(0) === '0' ? num.slice(1,2) : num
+  return Number(monthIndex)
 }
 
 const DayFour = (props:DayFourProps) => {
