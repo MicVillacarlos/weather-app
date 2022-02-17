@@ -1,9 +1,9 @@
+import './App.css'
 import { useEffect, useState,useReducer } from 'react';
 import { BrowserRouter as Router,Route,Routes} from "react-router-dom";
 import Headline from './Components/Headline';
 import NavbarButtons from './Components/NavbarButtons';
 import OverviewDays from './Components/OverviewDays'
-import './App.css'
 import DayOne from './Components/DayOne'
 import DayTwo from './Components/DayTwo';
 import DayThree from './Components/DayThree';
@@ -11,15 +11,15 @@ import DayFour from './Components/DayFour';
 import DayFive from './Components/DayFive';
 import CityName from './Components/CityName';
 
-type state = {
+type stateType = {
   key: string
   city:string
 }
-type action = {
+type actionType = {
   type: string;
 }
 
-const reducer =(state:state,action:action)=>{
+const reducer =(state:stateType,action:actionType)=>{
   switch (action.type){
     case 'Manila':
       return {key:'264885',city:'Manila, Philippines 1000'}
@@ -49,7 +49,7 @@ const pickCity =(e:string)=>{
     dispatch({type:'Tokyo'})
 }
 
-type df = {
+type dfType = {
   Date:string;
   Temperature: any;
   Day: any;
@@ -59,8 +59,8 @@ type df = {
 useEffect (()=> {
     fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${state.key}?apikey=IsBJKbwVFGZGohB2NooCZTABsJgivF4t`)
     .then(res => res.json())
-    .then(res => setWeatherData(res.DailyForecasts.map((df:df) => {
-      return{
+    .then(res => setWeatherData(res.DailyForecasts.map((df:dfType) => {
+      return {
         date: df.Date.substring(5,10),
         tempHigh: df.Temperature.Maximum.Value,
         tempLow: df.Temperature.Minimum.Value,
@@ -74,15 +74,19 @@ useEffect (()=> {
       ))
     },[state]);
 
+  type weatherDataType ={
+    date: string;
+    temp: number;
+  }
 
   return (
     <Router>
         <Headline/>
-        <NavbarButtons onClick={(e:MouseEvent|string|any)=>pickCity(e.target.value)}/>
+        <NavbarButtons onClick={(e)=>pickCity((e.target as HTMLInputElement).value)}/>
         <CityName city={state.city}/>
       <Routes>
           <Route path='/' 
-          element = {weatherData.map((i:any,index:number)=>(
+          element = {weatherData.map((i:weatherDataType,index:number)=>(
               <OverviewDays key={index} date={i.date} AvgTemp={i.temp} page={`/${index}`}/>
             ))}
           />

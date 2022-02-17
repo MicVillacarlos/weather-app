@@ -11,16 +11,11 @@ type DayTwoProps = {
   typeNight:string;
 }
 
-// type monthFunction = {
-//   num: any;
-//   charAt: any;
-//   slice: any;
-// }
-
 const months = ['','Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nove','Dec']
 
-const monthConvert =  (num:any) => {
-  return num.charAt(0) ? num.slice(1,2) : num
+const monthConvert = (num: string):number => {
+  const monthIndex = num.charAt(0) === '0' ? num.slice(1,2) : num
+  return Number(monthIndex)
 }
 
 const DayTwo = (props:DayTwoProps) => {
